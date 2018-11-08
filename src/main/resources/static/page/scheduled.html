@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <title>TASK监控</title>
+
+        <link rel="icon" type="image/x-icon" href="../favicon.ico">
+        <script type="text/javascript" src="./jquery.js"></script>
+        <script type="text/javascript" src="./scheduled.js"></script>
+        <script type="text/javascript" src="./common.js"></script>
+        <script type="text/javascript" src="./jqpaginator.min.js"></script>
+        <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./My97DatePicker/WdatePicker.js"></script>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+
+        <style>
+
+            th
+            {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                text-align: center
+            }
+
+            td
+            {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                text-align: center
+            }
+
+            label
+            {
+                font-family: 'Microsoft JhengHei'
+            }
+
+            .rowM
+            {
+                margin: 20px;
+            }
+
+            .task
+            {
+                margin-right: 20px;
+            }
+
+            /*#msg{
+                width:200px;
+                height: 125px;
+                position: fixed;
+                z-index:999;
+                top: 50%;
+                margin-top:-80px;
+                left:50%;
+                margin-left:-133px;
+                background:#fff;
+                box-shadow:5px 5px 8px #999;
+                font-size:17px;
+                color:#666;
+                border:1px solid #f8f8f8;
+                text-align: center;
+                line-height: 2rem;
+                display:inline-block;
+                padding-bottom:20px;
+                border-radius:5px;
+            }
+
+            #msg_top{
+                background:#30a2eb;
+                padding:5px 15px 5px 20px;
+                text-align: center;
+                color: #fff;
+                border-radius: 5px;
+            }
+
+            #msg_top span{
+                font-size:22px;
+                float:right;
+                cursor:pointer;
+            }
+
+            #msg_cont{
+                padding:45px 20px 50px;
+                color: #676767;
+                font-size: 20px;
+            }
+
+            #msg_clear{
+                width: 110px;
+                height: 35px;
+                display:inline-block;
+                color:#fff;
+                padding:1px 15px;
+                background:#30a2eb;
+                border-radius:2px;
+                margin-right:15px;
+                line-height: 35px;
+                cursor:pointer;
+            }*/
+
+            #msg{
+                width:200px;
+                height: 125px;
+                position: fixed;
+                z-index:999;
+                top: 50%;
+                margin-top:-80px;
+                left:50%;
+                margin-left:-133px;
+                background:#fff;
+                box-shadow:5px 5px 8px #999;
+                font-size:17px;
+                color:#666;
+                border:1px solid #f8f8f8;
+                text-align: center;
+                line-height: 2rem;
+                display:inline-block;
+                padding-bottom:20px;
+                border-radius:5px;
+            }
+
+            #msg_top{
+                background:#30a2eb;
+                padding:5px 15px 5px 20px;
+                text-align: center;
+                color: #fff;
+                border-radius: 5px;
+            }
+
+            #msg_top span{
+                font-size:22px;
+                float:right;
+                cursor:pointer;
+            }
+
+            #msg_cont{
+                padding:30px 24px 14px;
+                color: #676767;
+                font-size: 41px;
+            }
+
+            #msg_s{
+                width:450px;
+                height: 200px;
+                position: fixed;
+                z-index:999;
+                top: 50%;
+                margin-top:-80px;
+                left:45%;
+                margin-left:-133px;
+                background:#fff;
+                box-shadow:5px 5px 8px #999;
+                font-size:17px;
+                color:#666;
+                border:1px solid #f8f8f8;
+                text-align: center;
+                line-height: 2rem;
+                display:inline-block;
+                padding-bottom:20px;
+                border-radius:5px;
+            }
+
+            #msg_top_s{
+                background:#30a2eb;
+                padding:5px 15px 5px 20px;
+                text-align: center;
+                color: #fff;
+                border-radius: 5px;
+            }
+
+            #msg_top span_s{
+                font-size:22px;
+                float:right;
+                cursor:pointer;
+            }
+
+            #msg_cont_s{
+                padding:30px 24px 14px;
+                color: #676767;
+                font-size: 41px;
+            }
+
+            #msg_t{
+                width:800px;
+                height: 600px;
+                position: fixed;
+                z-index:999;
+                top: 25%;
+                margin-top:-80px;
+                left:35%;
+                margin-left:-133px;
+                background:#fff;
+                box-shadow:5px 5px 8px #999;
+                font-size:17px;
+                color:#666;
+                border:1px solid #f8f8f8;
+                text-align: center;
+                line-height: 2rem;
+                display:inline-block;
+                padding-bottom:20px;
+                border-radius:5px;
+            }
+
+            #msg_top_t{
+                background:#30a2eb;
+                padding:5px 15px 5px 20px;
+                text-align: center;
+                color: #fff;
+                border-radius: 5px;
+            }
+
+            #msg_top span_t{
+                font-size:22px;
+                float:right;
+                cursor:pointer;
+            }
+
+            #msg_cont_t{
+                padding:30px 24px 14px;
+                color: #676767;
+                font-size: 15px;
+            }
+
+            #msg_h{
+                width:800px;
+                height: 800px;
+                position: fixed;
+                z-index:999;
+                top: 16%;
+                margin-top:-80px;
+                left:35%;
+                margin-left:-133px;
+                background:#fff;
+                box-shadow:5px 5px 8px #999;
+                font-size:17px;
+                color:#666;
+                border:1px solid #f8f8f8;
+                text-align: center;
+                line-height: 2rem;
+                display:inline-block;
+                padding-bottom:20px;
+                border-radius:5px;
+            }
+
+            #msg_top_h{
+                background:#30a2eb;
+                padding:5px 15px 5px 20px;
+                text-align: center;
+                color: #fff;
+                border-radius: 5px;
+            }
+
+            #msg_top span_h{
+                font-size:22px;
+                float:right;
+                cursor:pointer;
+            }
+
+            #msg_cont_h{
+                padding:30px 24px 14px;
+                color: #676767;
+                font-size: 15px;
+            }
+
+            #msg_c{
+                width:250px;
+                height: 170px;
+                position: fixed;
+                z-index:999;
+                top: 41%;
+                margin-top:-80px;
+                left:45%;
+                margin-left:-133px;
+                background:#fff;
+                box-shadow:5px 5px 8px #999;
+                font-size:17px;
+                color:#666;
+                border:1px solid #f8f8f8;
+                text-align: center;
+                line-height: 2rem;
+                display:inline-block;
+                padding-bottom:20px;
+                border-radius:5px;
+            }
+
+            #msg_top_c{
+                background:#30a2eb;
+                padding:5px 15px 5px 20px;
+                text-align: center;
+                color: #fff;
+                border-radius: 5px;
+            }
+
+            #msg_top span_c{
+                font-size:22px;
+                float:right;
+                cursor:pointer;
+            }
+
+            #msg_cont_c{
+                padding:30px 24px 14px;
+                color: #961010;
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            .cus{
+                display: none;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div id="container" class="container-fluid">
+            <div class="row-fluid rowM">
+                <div class="span12">
+                    <button id="listTaskData" class="task btn btn-info" type="button">触发器列表</button>
+                    <button id="getListJob" class="task btn btn-info" type="button">JOB列表</button>
+                    <button id="getHandOutListTask" class="task btn btn-info" type="button">分发任务列表</button>
+                    <button id="getListJobFail" class="task btn btn-info" type="button">失败的JOB列表</button>
+                    <button id="getListJobSuccess" class="task btn btn-info" type="button">成功的JOB列表</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button id="start" class="task btn btn-success cus" type="button">启动</button>
+                    <button id="stop" class="task btn btn-warning cus" type="button">停止</button>
+                    <button id="startAll" class="task btn btn-success" type="button">全部启动</button>
+                    <button id="stopAll" class="task btn btn-warning" type="button">全部停止</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button id="refresh" class="task btn btn-info" type="button">开启刷新</button>
+                    <input id="time" class="input-medium search-query" placeholder="刷新间隔时间" style="margin-left: 5px;width:90px" type="text" />&nbsp;S
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button id="refreshPageSize" class="task btn btn-info" type="button">设置页面大小并刷新</button>
+                    <input id="pageSize" class="input-medium search-query" placeholder="页面大小" style="margin-left: 5px;width:61px" type="text" />
+                </div>
+            </div>
+            <div class="row-fluid rowM">
+                <div class="span12">
+                    <label class="control-label" style="width: 90px;">任务池</label>
+                    <label class="control-label" style="width: 90px;">核心线程数:</label><label id="_coreNum" class="control-label" style="width: 50px;"></label>
+                    <label class="control-label" style="width: 84px;">最大线程数:</label><label id="_maxNum" class="control-label" style="width: 50px;"></label>
+                    <label class="control-label" style="width: 154px;">当前正在运行的任务数:</label><label id="_currentTaskNum" class="control-label" style="width: 50px;"></label>
+                    <label class="control-label" style="width: 112px;">等待的任务数量:</label><label id="_waitNum" class="control-label" style="width: 100px;"></label>
+                    <label class="control-label" style="width: 126px;">当前已完成的任务:</label><label id="_currentFinishedNum" class="control-label" style="width: 100px;"></label>
+                </div>
+            </div>
+            <div class="row-fluid rowM">
+                <div class="span12">
+                    <label class="control-label" style="width: 90px;">分发池</label>
+                    <label class="control-label" style="width: 90px;">核心线程数:</label><label id="coreNum" class="control-label" style="width: 50px;"></label>
+                    <label class="control-label" style="width: 84px;">最大线程数:</label><label id="maxNum" class="control-label" style="width: 50px;"></label>
+                    <label class="control-label" style="width: 154px;">当前正在运行的任务数:</label><label id="currentTaskNum" class="control-label" style="width: 50px;"></label>
+                    <label class="control-label" style="width: 112px;">等待的任务数量:</label><label id="waitNum" class="control-label" style="width: 100px;"></label>
+                    <label class="control-label" style="width: 126px;">当前已完成的任务:</label><label id="currentFinishedNum" class="control-label" style="width: 100px;"></label>
+                </div>
+            </div>
+            <div class="row-fluid rowM">
+                <div class="span12">
+                    <label class="control-label" style="">ID</label>&nbsp;&nbsp;<input id="id" class="input-medium search-query" style="margin-right: 20px" type="text" />
+                    <label class="control-label" style="">状态</label>&nbsp;&nbsp;<input id="state" class="input-medium search-query" style="margin-right: 20px" type="text" />
+                    <label class="control-label" style="">名称</label>&nbsp;&nbsp;<input id="name" class="input-medium search-query" style="margin-right: 20px" type="text" />
+                    &nbsp;&nbsp;
+                    <button id="search" type="button" class="btn">查找</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button id="taskCreate" class="task btn btn-info" type="button">创建TASK</button>
+                    <button id="handleCreate" class="task btn btn-info" type="button">创建分发任务</button>
+                </div>
+            </div>
+            <div class="row-fluid rowM">
+                <div class="span4">
+                    <span style="color: red">TASK启动只能是在state=5(也就是当前任务暂停中的状态下)才能启动成功</span>&nbsp;
+                    <span style="color: red">TASK停止只能是在state=0(也就是当前任务未执行的状态下)才能停止成功</span>&nbsp;
+                    <span style="color: red">TASK编辑只能是在state=5(也就是当前任务暂停中的状态下)才能编辑成功</span>&nbsp;
+                    <span style="color: red">TASK删除只能是在state=5)也就是当前任务暂停中的状态下)才能删除成功</span>&nbsp;
+                    <span style="color: red">TASK立即执行只能是在state=5)也就是当前任务暂停中的状态下)才能执行成功</span>&nbsp;
+                    <span style="color: red">分发任务的并发数建议设置为1</span>
+                </div>
+                <div id="page" class="span8">
+                </div>
+            </div>
+            <div class="row-fluid rowM">
+                <div id="data" class="span12 table-responsive">
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+</html>
